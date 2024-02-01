@@ -26,24 +26,29 @@ Before you begin, ensure you have met the following requirements:
 ### Building the Project
 
 #### Clone the repository
-git clone https://github.com/yourusername/your-application.git
+~~~
+git clone https://github.com/deepcrazy/HclAssignment.git
+~~~
 
 #### Change directory
-cd your-application
+~~~
+cd HclAssignment
+~~~
 
-#### Build with Maven
+#### Build and Run within IntelliJ Idea IDE
+- Go to File -> ProjectStructure -> And Choose JDK 1.8
+- Go to HclAssignmentApplication.java file and Run it.
+
+
+#### OR Build with Maven
 ~~~
 ./mvnw clean install
 ~~~
 
-#### Run with Maven
+#### OR Run with Maven
 ~~~
 ./mvnw spring-boot:run
 ~~~
-
-#### Or Run within IntelliJ Idea IDE 
-- Go to File -> ProjectStructure -> And Choose JDK 1.8
-- Go to HclAssignmentApplication.java file and Run it.
 
 ### Endpoints
 
@@ -65,7 +70,7 @@ cd your-application
 
 #### Security
 
-- Pseudo code is provided for Basic authentication over [here]().
+- Pseudo code is provided for Basic authentication over here: [PsudeoCodeAuthJWT.md](./PsudeoCodeAuthJWT.md).
 
 #### Testing
 
@@ -83,11 +88,11 @@ mvn verify
 
 # GET User Details
 ~~~
-curl -X GET http://localhost:8080/api/userdetails/1
+curl -X GET http://localhost:8082/api/userdetails/1
 ~~~
 
 # PUT Update User Details
 ~~~
 
-curl -X PUT -H "Content-Type: application/json" -d '{"title":"mr","firstName":"UpdatedfirstName","lastName":"UpdatedLastName","gender":"male","address":{"street":"Updated address street","city":"Updated city","state":"Updated state","postcode":98765}}' http://localhost:8080/api/userdetails/2
+curl -X PUT -H "Content-Type: application/json" -d '{"title":"mr","firstName":"UpdatedfirstName","lastName":"UpdatedLastName","gender":"male","address":{"street":"Updated address street","city":"Updated city","state":"Updated state","postcode":98765}}' http://localhost:8082/api/userdetails/2
 ~~~

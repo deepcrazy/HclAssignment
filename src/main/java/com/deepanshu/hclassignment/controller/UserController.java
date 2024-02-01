@@ -31,8 +31,6 @@ public class UserController {
 
     @PutMapping("/{emp_id}")
     public ResponseEntity<User> updateUserByEmpId(@PathVariable("emp_id") String empIdStr, @RequestBody User updateUser) {
-        System.out.println("Entered updateUserById API");
-        System.out.println(empIdStr);
         logger.info("Invoked updateUserByEmpId method with empId: {} and updatedUser: {}", empIdStr, updateUser);
         long empId = validateNumericEmpId(empIdStr);
         return new ResponseEntity<>(userService.updateUserByEmpId(empId, updateUser), HttpStatus.OK);
@@ -42,9 +40,9 @@ public class UserController {
         try {
             long empId = Long.parseLong(empIdStr);
             if (empId > 0L) return empId;
-            else throw new InvalidEmpIdException("Invalid user ID. Must be non-zero numeric.");
+            else throw new InvalidEmpIdException("Invalid emp ID. Must be non-zero numeric.");
         } catch (NumberFormatException e) {
-            throw new InvalidEmpIdException("Invalid user ID. Must be non-zero numeric.");
+            throw new InvalidEmpIdException("Invalid emp ID. Must be non-zero numeric.");
         }
     }
 }
