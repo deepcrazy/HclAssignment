@@ -14,17 +14,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()  // Allow unrestricted access to all paths
+                .antMatchers("/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll() // Allow unrestricted access to all paths
                 .and()
-                .csrf().disable();  // Disable CSRF for simplicity, consider enabling in a production environment
-
-        // Allow access to the H2 console
-        http.authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll();
-
-        // Disable CSRF and frame options for H2 console
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+                .csrf().disable()
+                .headers().frameOptions().disable();
     }
 
     @Bean

@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(existingUser);
     }
 
-    // Function to get property names having null or zero values to exclude these
-    // properties while using BeanUtils.copyProperties method.
+    // Function to get property names having null or zero values to exclude null
+    // and zero value properties while using BeanUtils.copyProperties method.
     private String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
         Set<String> emptyNames = new HashSet<>();
         for (PropertyDescriptor pd : pds) {
             Object srcValue = src.getPropertyValue(pd.getName());
-            System.out.println(srcValue);
             if (srcValue == null || (srcValue instanceof Long && ((Long) srcValue).intValue() == 0L))
                 emptyNames.add(pd.getName());
         }
