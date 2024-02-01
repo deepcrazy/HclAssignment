@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @CircuitBreaker(name = "userServiceCircuitBreaker", fallbackMethod = "getUserByEmpIdFallback")
     public User getUserByEmpId(long empId) {
-        System.out.println("Cheking.. ");
         return userRepository.findByEmpId(empId).orElseThrow(() -> new ResourceNotFoundException("User", "EmpId", empId));
     }
 

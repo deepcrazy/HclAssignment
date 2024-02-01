@@ -26,24 +26,29 @@ Before you begin, ensure you have met the following requirements:
 ### Building the Project
 
 #### Clone the repository
-git clone https://github.com/yourusername/your-application.git
+~~~
+git clone https://github.com/deepcrazy/HclAssignment.git
+~~~
 
 #### Change directory
-cd your-application
+~~~
+cd HclAssignment
+~~~
 
-#### Build with Maven
+#### Build and Run within IntelliJ Idea IDE
+- Go to File -> ProjectStructure -> And Choose JDK 1.8
+- Go to HclAssignmentApplication.java file and Run it.
+
+
+#### OR Build with Maven
 ~~~
 ./mvnw clean install
 ~~~
 
-#### Run with Maven
+#### OR Run with Maven
 ~~~
 ./mvnw spring-boot:run
 ~~~
-
-#### Or Run within IntelliJ Idea IDE 
-- Go to File -> ProjectStructure -> And Choose JDK 1.8
-- Go to HclAssignmentApplication.java file and Run it.
 
 ### Endpoints
 
