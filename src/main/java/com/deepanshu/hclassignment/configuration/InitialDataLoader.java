@@ -2,22 +2,17 @@ package com.deepanshu.hclassignment.configuration;
 
 import com.deepanshu.hclassignment.model.Address;
 import com.deepanshu.hclassignment.model.User;
-import com.deepanshu.hclassignment.service.UserService;
+import com.deepanshu.hclassignment.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
 public class InitialDataLoader {
-
-    private final UserService userService;
-
-    public InitialDataLoader(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     public CommandLineRunner initializeUsers() {
@@ -28,46 +23,31 @@ public class InitialDataLoader {
     }
 
     private void insertInitialUsers() {
-        List<User> initialUsers = new ArrayList<>();
 
-        // Set user1 properties
-        Address user1Address = new Address();
-        user1Address.setStreet("12345 holling rd");
-        user1Address.setCity("Syndey");
-        user1Address.setState("nsw");
-        user1Address.setPostcode(20000);
+        for (int i = 1; i <= 5; i++) {
+            User user = new User();
+            Address address = new Address();
+            if (i % 2 == 0) {
+                user.setTitle("Mr.");
+                user.setGender("Male");
+            } else {
+                user.setTitle("Mrs.");
+                user.setGender("Female");
+            }
+            user.setFirstName("user" + i);
+            user.setLastName("user" + i + "lastname");
 
-        User user1 = new User();
-        user1.setFirstName("deep");
-        user1.setLastName("gupta");
-        user1.setGender("male");
-        user1.setTitle("mr");
-//        user1.setEmpId("12345");
-        user1.setAddress(user1Address);
+            address.setStreet("12345 holling rd" + i);
+            address.setCity("sydney" + i);
+            address.setState("nsw" + i);
+            address.setPostcode(20100 + i);
 
-        initialUsers.add(user1);
-
-        // Set user2 properties
-        Address user2Address = new Address();
-        user2Address.setStreet("11 Epsom Downs Drive");
-        user2Address.setCity("North York");
-        user2Address.setState("NSW");
-        user2Address.setPostcode(40001);
-
-        User user2 = new User();
-        user2.setFirstName("sakshi");
-        user2.setLastName("gupta");
-        user2.setGender("female");
-        user2.setTitle("mrs");
-//        user2.setEmpId("67859");
-        user2.setAddress(user2Address);
-
-        initialUsers.add(user2);
-
-
-        // Save all users during initial setup
-        for (User user : initialUsers) {
-            userService.saveUser(user);
+            user.setAddress(address);
+            userRepository.save(user);
         }
+
+        List<User> users = userRepository.findAll();
+        System.out.println("Initialized users:");
+        users.forEach(System.out::println);
     }
 }

@@ -31,8 +31,6 @@ public class UserController {
 
     @PutMapping("/{emp_id}")
     public ResponseEntity<User> updateUserByEmpId(@PathVariable("emp_id") String empIdStr, @RequestBody User updateUser) {
-//        System.out.println("Entered updateUserById API");
-//        System.out.println(empIdStr);
         logger.info("Invoked updateUserByEmpId method with empId: {} and updatedUser: {}", empIdStr, updateUser);
         long empId = validateNumericEmpId(empIdStr);
         return new ResponseEntity<>(userService.updateUserByEmpId(empId, updateUser), HttpStatus.OK);
